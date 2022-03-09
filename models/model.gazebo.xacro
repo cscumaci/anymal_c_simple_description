@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="model_gazebo" params="name">
+
+        <!-- Ros control (For future actuated case) -->
+        <gazebo>
+            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+                <robotNamespace>${name}</robotNamespace>
+            </plugin>
+        </gazebo>
+
+ <!-- Leg_LF -->
+        <gazebo reference="LF_FOOT">
+            <gravity>true</gravity>
+            <selfCollide>true</selfCollide>
+            <material>Gazebo/Grey</material>
+            <sensor name="LF_foot_sensor" type="contact">
+                <always_on>true</always_on>
+                <update_rate>100.0</update_rate>
+                <contact>
+                    <collision>LF_shank_fixed_LF_FOOT__LF_FOOT_collision_collision_1</collision>
+                    <topic>/foot_contacts/LF_foot_contact</topic>
+                </contact>
+                <plugin name="LF_foot_bumper" filename="libgazebo_ros_bumper.so">
+                    <bumperTopicName>/foot_contacts/LF_foot_contact</bumperTopicName>
+                    <frameName>world</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+        <!-- Leg_LH -->
+    
+        <gazebo reference="LH_FOOT">
+            <gravity>true</gravity>
+            <selfCollide>true</selfCollide>
+            <material>Gazebo/Grey</material>
+            <sensor name="LH_foot_sensor" type="contact">
+                <always_on>true</always_on>
+                <update_rate>100.0</update_rate>
+                <contact>
+                    <collision>LH_shank_fixed_LH_FOOT__LH_FOOT_collision_collision_1</collision>
+                    <topic>/foot_contacts/LH_foot_contact</topic>
+                </contact>
+                <plugin name="LH_foot_bumper" filename="libgazebo_ros_bumper.so">
+                    <bumperTopicName>/foot_contacts/LB_foot_contact</bumperTopicName>
+                    <frameName>world</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+        <!-- Leg_RF -->
+        <gazebo reference="RF_FOOT">
+            <gravity>true</gravity>
+            <selfCollide>true</selfCollide>
+            <material>Gazebo/Grey</material>
+            <sensor name="RF_foot_sensor" type="contact">
+                <always_on>true</always_on>
+                <update_rate>100.0</update_rate>
+                <contact>
+                    <collision>RF_shank_fixed_RF_FOOT__RF_FOOT_collision_collision_1</collision>
+                    <topic>/foot_contacts/RF_foot_contact</topic>
+                </contact>
+                <plugin name="RF_foot_bumper" filename="libgazebo_ros_bumper.so">
+                    <bumperTopicName>/foot_contacts/RF_foot_contact</bumperTopicName>
+                    <frameName>world</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+        <!-- Leg_RH -->
+       
+        <gazebo reference="RH_FOOT">
+            <gravity>true</gravity>
+            <selfCollide>true</selfCollide>
+            <material>Gazebo/Grey</material>
+            <sensor name="RH_foot_sensor" type="contact">
+                <always_on>true</always_on>
+                <update_rate>100.0</update_rate>
+                <contact>
+                    <collision>RH_shank_fixed_RH_FOOT__RH_FOOT_collision_collision_11</collision>
+                    <topic>/foot_contacts/RH_foot_contact</topic>
+                </contact>
+                <plugin name="RH_foot_bumper" filename="libgazebo_ros_bumper.so">
+                    <bumperTopicName>/foot_contacts/RB_foot_contact</bumperTopicName>
+                    <frameName>world</frameName>
+                </plugin>
+            </sensor>
+        </gazebo>
+
+    </xacro:macro>
+
+</robot>
