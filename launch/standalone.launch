@@ -5,7 +5,7 @@
   <!-- Name of the robot description parameter -->
   <arg name="description_name"         default="anymal_description"/>
   <!-- Set robot description path -->
-  <arg name="description_file"         default="$(find anymal_c_simple_description)/urdf/anymal.urdf"/>
+  <arg name="description_file"         default="$(find anymal_c_simple_description)/urdf/anymal_rviz.urdf"/>
   <!-- Joint state topic name -->
   <arg name="joint_states_topic"       default="/joint_states"/>
 
@@ -15,13 +15,13 @@
     <arg name="description_file" value="$(arg description_file)"/>
   </include>
 
-  <!-- Joint state publisher -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" output="screen">
-    <param name="use_gui"           value="true"/>
-    <param name="rate"              value="100"/>
+  <!-- Joint state publisher 
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
+   <param name="use_gui"           value="false"/> 
+    <param name="rate"              value="1"/> 
     <remap from="robot_description" to="$(arg description_name)"/>
-    <remap from="joint_states"      to="$(arg joint_states_topic)"/>
-  </node>
+    <remap from="joint_states"      to="$(arg joint_states_topic)"/> 
+  </node> -->
 
   <!-- Robot state publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
@@ -29,7 +29,7 @@
     <param name="use_tf_static"     value="true"/>
     <remap from="robot_description" to="$(arg description_name)"/>
     <remap from="joint_states"      to="$(arg joint_states_topic)"/>
-  </node>
+  </node> 
 
   <!-- RViz -->
   <node name="rviz" pkg="rviz" type="rviz"

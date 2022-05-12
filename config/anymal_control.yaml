@@ -3,6 +3,12 @@ anymal:
   floating_base_controller:
     type: anymal_c_simple_description/floating_base_controller
     joint_names:
+         - trans_x
+         - trans_y
+         - trans_z
+         - rot_z
+         - rot_y
+         - rot_x
          - LF_HAA
          - LF_HFE
          - LF_KFE

@@ -7,7 +7,7 @@
 
 
 
-<robot name="anymal">
+<robot name="anymal_C">
 
 <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
@@ -15,10 +15,56 @@
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>	
-
-  
 	
-   
+   <link name="world"/>
+  
+  <joint name="trans_x" type="prismatic">
+	  <parent link="world"/>
+	  <child link="trans_x"/>
+	  <axis xyz="1 0 0"/>
+	  <limit lower="-50" upper="50" effort="80" velocity="7.5"/>
+  </joint>
+  <link name="trans_x"/>
+
+  <joint name="trans_y" type="prismatic">
+	  <parent link="trans_x"/>
+	  <child link="trans_y"/>
+	  <axis xyz="0 1 0"/>
+	  <limit lower="-50" upper="50" effort="80" velocity="7.5"/>
+  </joint>
+  <link name="trans_y"/>
+  
+    <joint name="trans_z" type="prismatic">
+	 
+	  <parent link="trans_y"/>
+	  <child link="trans_z"/>
+	  <axis xyz="0 0 1"/>
+	  <limit lower="-50" upper="50" effort="80" velocity="7.5"/>
+  </joint>
+  
+  <link name="trans_z"/>
+  
+  <joint name="rot_z" type="continuous">
+	  <parent link="trans_z"/>
+	  <child link="rot_z"/>
+	  <axis xyz="0 0 1"/>
+  </joint>
+  <link name="rot_z"/>
+
+  <joint name="rot_y" type="continuous">
+	  <parent link="rot_z"/>
+	  <child link="rot_y"/>
+	  <axis xyz="0 1 0"/>
+  </joint>
+  <link name="rot_y"/>
+
+
+  <joint name="rot_x" type="continuous"> 
+	  <parent link="rot_y"/>
+	  <child link="base"/>
+	  <axis xyz="1 0 0"/>
+  </joint>
+  
     <link name="base">
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0"/>
